@@ -49,4 +49,4 @@ NULL
 #' @examples
 #' head(net.kegg)
 #'
-"net.kegg"
+NULL

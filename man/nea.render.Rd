@@ -6,8 +6,8 @@
 \usage{
 nea.render(AGS, FGS, NET, Lowercase = 1, ags.gene.col = 2,
   ags.group.col = 3, fgs.gene.col = 2, fgs.group.col = 3,
-  net.gene1.col = 1, net.gene2.col = 2, echo = 1, graph = FALSE,
-  na.replace = 0, Parallelize = 1)
+  net.gene1.col = 1, net.gene2.col = 2, echo = 1, na.replace = 0,
+  Parallelize = 1)
 }
 \arguments{
 \item{AGS}{Either a text file or a list of members of each AGS (see Details). Group IDs should be found in \code{ags.group.col} and gene IDs should be found in \code{ags.gene.col}. As a special option, an AGS list for can also be pre-created from raw data matrices of the format "genes X samples". Such matrices can contain information on gene copy number, gene/protein expression, gene methylation etc.  (\code{\link{samples2ags}}) or point mutation data (\code{\link{mutations2ags}}). These two functions return AGS lists of length=ncol(Nsamples).}
@@ -32,8 +32,6 @@ nea.render(AGS, FGS, NET, Lowercase = 1, ags.gene.col = 2,
 
 \item{echo}{if messages about execution progress should appear.}
 
-\item{graph}{Plot the heat map}
-
 \item{na.replace}{replace NA values. Default=0, i.e. not to replace}
 
 \item{Parallelize}{The number of CPU cores to be used for the step "Counting actual links" (the other steps are sufficiently fast). The option is not supported on Windows.}
@@ -56,7 +54,7 @@ summary(fgs.list)
 data(net.kegg)
 netpath <- net.kegg
 net <- import.net(netpath)
-n1 <- nea.render(AGS=ags.list[1:10], FGS=fgs.list[1:10], NET=net, graph=FALSE)
+n1 <- nea.render(AGS=ags.list[1:10], FGS=fgs.list[1:10], NET=net)
 hist(n1$chi, breaks=100)
 hist(n1$z, breaks=100)
 hist(n1$p, breaks=100)

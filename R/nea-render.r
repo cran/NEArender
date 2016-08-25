@@ -13,7 +13,6 @@
 #' @param net.gene2.col number of the column containing second nodes of each network edge (only needed if NET is submitted as a text file).
 #' @param echo if messages about execution progress should appear.
 #' @param Parallelize The number of CPU cores to be used for the step "Counting actual links" (the other steps are sufficiently fast). The option is not supported on Windows.
-#' @param graph Plot the heat map
 #' @param na.replace replace NA values. Default=0, i.e. not to replace  
 
 
@@ -35,14 +34,14 @@
 #' data(net.kegg)
 #' netpath <- net.kegg
 #' net <- import.net(netpath)
-#' n1 <- nea.render(AGS=ags.list[1:10], FGS=fgs.list[1:10], NET=net, graph=FALSE)
+#' n1 <- nea.render(AGS=ags.list[1:10], FGS=fgs.list[1:10], NET=net)
 #' hist(n1$chi, breaks=100)
 #' hist(n1$z, breaks=100)
 #' hist(n1$p, breaks=100)
 #' hist(n1$q, breaks=100)
 #' @export
 
-nea.render <- function (AGS, FGS, NET , Lowercase = 1, ags.gene.col = 2, ags.group.col = 3, fgs.gene.col = 2, fgs.group.col = 3, net.gene1.col = 1, net.gene2.col = 2, echo=1, graph=FALSE, na.replace = 0, Parallelize=1) {
+nea.render <- function (AGS, FGS, NET , Lowercase = 1, ags.gene.col = 2, ags.group.col = 3, fgs.gene.col = 2, fgs.group.col = 3, net.gene1.col = 1, net.gene2.col = 2, echo=1,na.replace = 0, Parallelize=1) {
 digitalize = TRUE; 
 if (!is.na(na.replace) & !is.numeric(na.replace)) {stop("Parameter 'na.replace' should contain a numeric value or NA...");}
 if (echo>0) {print("Preparing input datasets:");}
@@ -135,7 +134,6 @@ nrow = nrow(stats$p), ncol = ncol(stats$p),
 dimnames = list(rownames(stats$p), colnames(stats$p)), 
 byrow=FALSE);
 stats$q[which(stats$z < 0)] = 1;
-if (graph) {set.heat(ags.list,fgs.list,stats$z)}
 if (echo>0) {print("Done.");}
 return(stats);
 }
